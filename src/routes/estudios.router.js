@@ -3,11 +3,11 @@ import {getEstudios, getEstudio, updateEstudios, createEstudios, deleteEstudios}
 
 const router = Router();
 
-router.get('/estudios', getEstudios)
-router.get('/estudios/:id', getEstudio)
-router.post('/estudios', createEstudios)
-router.put('/estudios/:id', updateEstudios)
-router.delete('/estudios/:id', deleteEstudios)
+router.get('/listar', getEstudios)
+router.get('/listar/:id', getEstudio)
+router.post('/', createEstudios)
+router.put('/:id', updateEstudios)
+router.delete('/:id', deleteEstudios)
 
 
 
