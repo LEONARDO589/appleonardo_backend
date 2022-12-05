@@ -14,3 +14,4 @@ export const pool = new createPool({
     queueLimit: 0 
 });
 
+//module.exports = conectarBD;
