@@ -1,11 +1,11 @@
-import { createPool } from "mysql2/promise";
+const mysql = require('mysql2/promise');
 
-import * as dotenv from 'dotenv'
-dotenv.config({path: "variables.env"})
+require("dotenv").config({path: "variables.env"});
 
-export const pool = new createPool({
+//Mysql 
+const conectarBD = mysql.createPool({
     host: process.env.HOST,
-    port: process.env.PORT,
+    port: process.env.PORTS,
     user: process.env.USER_BASE,
     password: process.env.PASSWORD_BASE,
     database: process.env.DATA_BASE,
@@ -14,4 +14,5 @@ export const pool = new createPool({
     queueLimit: 0 
 });
 
-//module.exports = conectarBD;
+
+module.exports = conectarBD;

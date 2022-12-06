@@ -1,10 +1,11 @@
-import { pool } from "../db/condb.js"
+const conectarBD = require('../db/condb.js')
 
-export const getAllEducacion = async (req, res ) =>{
+exports.getAllEducacion = async(req, res ) =>{
+
     try {
-        const [result] = await pool.query("SELECT * FROM educacion ORDER BY createdAt ASC"
+        const [result] = await conectarBD.query("SELECT * FROM educacion ORDER BY createdAt ASC"
         );
-
+        console.log(result)
         if (result.length === 0 )
         return res.status(404).json({ message: "No hay registros "})
 
@@ -14,9 +15,10 @@ export const getAllEducacion = async (req, res ) =>{
     }
 }
 
-export const getEducacion = async (req, res ) =>{
+
+exports.getEducacion = async (req, res ) =>{
   try {
-    const [result] = await pool.query("SELECT * FROM educacion WHERE id = ?", [req.params.id]
+    const [result] = await conectarBD.query("SELECT * FROM educacion WHERE id = ?", [req.params.id]
     );
     if (result.length === 0){
         return res.status (404).json({message: "Id no encontrado en la base...."})
@@ -27,10 +29,10 @@ export const getEducacion = async (req, res ) =>{
   }
 };
 
-export const createEducacion = async (req, res ) => {
+exports.createEducacion = async (req, res ) => {
     try {
         const {codigo, nombre, universidad, horas, fecha_inicio, fecha_final} = req.body;
-        const [result] = await pool.query("INSERT INTO educacion (codigo, nombre, universidad, horas, fecha_inicio, fecha_final) VALUES (?, ?, ?, ?, ?, ?)", 
+        const [result] = await conectarBD.query("INSERT INTO educacion (codigo, nombre, universidad, horas, fecha_inicio, fecha_final) VALUES (?, ?, ?, ?, ?, ?)", 
         [codigo, nombre, universidad, horas, fecha_inicio, fecha_final ])
         res.json({
             id: result.insertId,
@@ -46,7 +48,7 @@ export const createEducacion = async (req, res ) => {
     }
 };
 
-export const updateEducacion = async (req, res ) =>{
+exports.updateEducacion = async (req, res ) =>{
     try {
         const result = await pool.query("UPDATE educacion SET ? WHERE id = ? ", [
             req.body,
@@ -58,9 +60,9 @@ export const updateEducacion = async (req, res ) =>{
     }
 };
 
-export const deleteEducacion = async (req, res ) =>{
+exports.deleteEducacion = async (req, res ) =>{
     try {
-        const [result] = await pool.query("DELETE FROM educacion WHERE id = ?", [req.params.id]
+        const [result] = await conectarBD.query("DELETE FROM educacion WHERE id = ?", [req.params.id]
     );
     if (result.affectedRows === 0 )
         return res.status(404).json({ message: "No se encontro el registro seleccionado "})
@@ -70,3 +72,4 @@ export const deleteEducacion = async (req, res ) =>{
     }
 
 };
+
