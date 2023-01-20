@@ -1,15 +1,16 @@
-import { Router } from "express";
-import {getAllEducacion, getEducacion, createEducacion, updateEducacion, deleteEducacion} from '../controller/educacionController.js'
+const { Router } = require('express');
+const {getAllEducacion, getEducacion, createEducacion, updateEducacion, deleteEducacion} = require('../controller/educacionController.js');
 
 const router = Router();
 
 router.get('/listar', getAllEducacion)
 router.get('/listar/:id', getEducacion)
-router.post('/', createEducacion)
-router.put('/:id', updateEducacion)
+router.post('/crear', createEducacion)
+router.put('/update/:id', updateEducacion)
 router.delete('/:id', deleteEducacion)
 
+router.get("/con", (request, res) => {
+    res.send("<h1>Prueba educacion !!!")
+})
 
-
-export default router;
-
+module.exports = router;
