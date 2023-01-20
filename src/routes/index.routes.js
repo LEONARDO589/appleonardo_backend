@@ -5,10 +5,12 @@ const router = Router();
 
 
 const educacionRouter = require('./educacion.router.js')
+const contactoRouter = require('./contacto.router.js')
 
 router.use("/educacion", educacionRouter)
+router.use("/contacto", contactoRouter)
 
-router.get("/", (request, res) => {
+router.get("/con", (request, res) => {
     res.send("<h1>Prueba API OK!!!")
 })
 

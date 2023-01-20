@@ -1,17 +1,15 @@
 const { Router } = require('express');
 const {getAllEducacion, getEducacion, createEducacion, updateEducacion, deleteEducacion} = require('../controller/educacionController.js');
 
-const educacionController = require('../controller/educacionController')
-
 const router = Router();
 
-router.get('/listar', educacionController.getAllEducacion)
+router.get('/listar', getAllEducacion)
 router.get('/listar/:id', getEducacion)
-router.post('/', createEducacion)
-router.put('/:id', updateEducacion)
+router.post('/crear', createEducacion)
+router.put('/update/:id', updateEducacion)
 router.delete('/:id', deleteEducacion)
 
-router.get("/", (request, res) => {
+router.get("/con", (request, res) => {
     res.send("<h1>Prueba educacion !!!")
 })
 

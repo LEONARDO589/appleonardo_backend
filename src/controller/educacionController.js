@@ -5,7 +5,6 @@ exports.getAllEducacion = async(req, res ) =>{
     try {
         const [result] = await conectarBD.query("SELECT * FROM educacion ORDER BY createdAt ASC"
         );
-        console.log(result)
         if (result.length === 0 )
         return res.status(404).json({ message: "No hay registros "})
 
@@ -14,7 +13,6 @@ exports.getAllEducacion = async(req, res ) =>{
         return res.status(500).json({message: error.message});
     }
 }
-
 
 exports.getEducacion = async (req, res ) =>{
   try {
@@ -31,9 +29,9 @@ exports.getEducacion = async (req, res ) =>{
 
 exports.createEducacion = async (req, res ) => {
     try {
-        const {codigo, nombre, universidad, horas, fecha_inicio, fecha_final} = req.body;
-        const [result] = await conectarBD.query("INSERT INTO educacion (codigo, nombre, universidad, horas, fecha_inicio, fecha_final) VALUES (?, ?, ?, ?, ?, ?)", 
-        [codigo, nombre, universidad, horas, fecha_inicio, fecha_final ])
+        const {id, codigo, nombre, universidad, horas, fecha_inicio, fecha_final} = req.body;
+        const [result] = await conectarBD.query("INSERT INTO educacion (id, codigo, nombre, universidad, horas, fecha_inicio, fecha_final) VALUES (?,?,?,?,?,?,?)", 
+        [id, codigo, nombre, universidad, horas, fecha_inicio, fecha_final ])
         res.json({
             id: result.insertId,
             codigo,
@@ -50,7 +48,7 @@ exports.createEducacion = async (req, res ) => {
 
 exports.updateEducacion = async (req, res ) =>{
     try {
-        const result = await pool.query("UPDATE educacion SET ? WHERE id = ? ", [
+        const result = await conectarBD.query("UPDATE educacion SET ? WHERE id = ? ", [
             req.body,
             req.params.id,
         ]);
